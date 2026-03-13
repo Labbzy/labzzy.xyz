@@ -1,0 +1,116 @@
+---
+import { SITE } from '../data/site';
+
+interface Props {
+  activePage: 'home' | 'about';
+}
+
+const { activePage } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="footer" transition:persist="site-footer">
+  <p class="copyright">© {SITE.copyrightName} {year}</p>
+
+  <nav class="footer-nav" aria-label="Site navigation">
+    <a href="/" class:list={['nav-link', { active: activePage === 'home' }]}>Home</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="/about" class:list={['nav-link', { active: activePage === 'about' }]}>About</a>
+    <span class="sep" aria-hidden="true"></span>
+    <span class="reach-out">
+      Reach out&nbsp;<a href={`mailto:${SITE.contactEmail}`} class="email">{SITE.contactEmail}</a>
+    </span>
+  </nav>
+</footer>
+
+<style>
+  .footer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 24px 36px;
+  }
+
+  .copyright {
+    font-family: var(--font-ui);
+    font-size: var(--text-nav);
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .footer-nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px 16px;
+  }
+
+  .nav-link {
+    font-family: var(--font-ui);
+    font-size: var(--text-nav);
+    color: var(--color-text);
+    text-decoration: none;
+    opacity: 0.4;
+    transition: opacity 0.2s;
+  }
+
+  .nav-link.active {
+    font-weight: 700;
+    opacity: 1;
+  }
+
+  .sep {
+    display: inline-block;
+    width: 1px;
+    height: 13px;
+    background: var(--color-text);
+    flex-shrink: 0;
+  }
+
+  .reach-out {
+    font-family: var(--font-ui);
+    font-size: var(--text-nav);
+    color: var(--color-text);
+  }
+
+  .email {
+    font-family: var(--font-ui);
+    font-weight: 500;
+    font-size: var(--text-nav);
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .email:hover {
+    text-decoration: underline;
+  }
+
+  /* ── Desktop: single row ── */
+  @media (min-width: 768px) {
+    .footer {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 45px 36px;
+      gap: 24px;
+    }
+
+    .footer-nav {
+      flex-wrap: nowrap;
+    }
+  }
+</style>
+
+<script>
+  function syncActive() {
+    const path = window.location.pathname.replace(/\/$/, '') || '/';
+    document.querySelectorAll<HTMLAnchorElement>('.nav-link').forEach(link => {
+      const href = link.getAttribute('href')!.replace(/\/$/, '') || '/';
+      link.classList.toggle('active', href === path);
+    });
+  }
+
+  // Run on first load and after every View Transition navigation
+  syncActive();
+  document.addEventListener('astro:page-load', syncActive);
+</script>

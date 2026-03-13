@@ -10,6 +10,7 @@
   --color-text-muted:  rgba(0, 0, 0, 0.40); /* inactive nav links */
   --color-accent-teal: #00c8a0;   /* team avatar – Frank */
   --color-accent-pink: #ff3399;   /* team avatar – Loic */
+  --color-btn-green:   #2dff81;   /* CTA button background */
 
   /* ─── Typography ─────────────────────────────────── */
   /* --font-display, --font-ui, --font-accent are       */

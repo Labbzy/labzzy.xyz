@@ -1,7 +1,90 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../data/site';
 ---
 
-<BaseLayout title="Labzzy">
-  <h1>Labzzy</h1>
+<BaseLayout title="Labzzy — Product Design & Development Studio">
+  <div class="page">
+    <main class="main">
+      <div class="logo-wrap">
+        <img src="/logo.svg" alt="Labzzy" class="logo" />
+      </div>
+
+      <p class="tagline">A product design &amp; development studio</p>
+
+      <a href={SITE.sunikaUrl} class="cta">
+        <span class="cta-label">Check out our product</span>
+        <img src="/sunika-logo.svg" alt="" class="cta-icon" aria-hidden="true" />
+        <span class="cta-product">Sunika</span>
+      </a>
+    </main>
+
+    <Footer activePage="home" />
+  </div>
 </BaseLayout>
+
+<style>
+  .page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    padding: 60px 45px;
+  }
+
+  .logo-wrap {
+    width: min(933px, 88vw);
+  }
+
+  .logo {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .tagline {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 3vw, var(--text-display));
+    font-weight: 400;
+    font-style: normal;
+    color: var(--color-text);
+    text-align: center;
+    line-height: normal;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #2dff81;
+    border-radius: 10px;
+    padding: 9px 22px;
+    text-decoration: none;
+    font-family: var(--font-ui);
+    font-size: var(--text-body);
+    color: var(--color-text);
+    white-space: nowrap;
+    transition: opacity 0.15s;
+  }
+
+  .cta:hover {
+    opacity: 0.85;
+  }
+
+  .cta-icon {
+    width: 25px;
+    height: 25px;
+    display: block;
+    flex-shrink: 0;
+  }
+</style>

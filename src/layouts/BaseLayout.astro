@@ -1,5 +1,6 @@
 ---
 import Font from 'astro/components/Font.astro';
+import { ClientRouter } from 'astro:transitions';
 import '../styles/tokens.css';
 
 interface Props {
@@ -20,8 +21,46 @@ const { title = 'Labzzy' } = Astro.props;
     <Font cssVariable="--font-display" preload />
     <Font cssVariable="--font-ui" preload />
     <Font cssVariable="--font-accent" />
+    <ClientRouter />
   </head>
   <body>
     <slot />
   </body>
 </html>
+
+<style is:global>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Subtle fade + lift transition between pages */
+  @keyframes page-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes page-out {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(-8px); }
+  }
+
+  ::view-transition-old(root) {
+    animation: 220ms ease page-out;
+  }
+
+  ::view-transition-new(root) {
+    animation: 260ms ease page-in;
+  }
+</style>
