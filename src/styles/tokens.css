@@ -1,0 +1,27 @@
+/*
+  Design tokens extracted from Figma (Labzzy-website)
+  Node refs: 1:19 (icon), 1:35 (About page)
+*/
+
+:root {
+  /* ─── Colors ─────────────────────────────────────── */
+  --color-bg:          #dcfff9;   /* mint/aqua page background */
+  --color-text:        #000000;   /* primary text */
+  --color-text-muted:  rgba(0, 0, 0, 0.40); /* inactive nav links */
+  --color-accent-teal: #00c8a0;   /* team avatar – Frank */
+  --color-accent-pink: #ff3399;   /* team avatar – Loic */
+
+  /* ─── Typography ─────────────────────────────────── */
+  /* --font-display, --font-ui, --font-accent are       */
+  /* injected by Astro from astro.config.mjs fonts[].  */
+  /* Stack Sans Notch – display/section headings        */
+  /* Space Grotesk   – UI text, nav, footer, body       */
+  /* Short Stack     – supplementary/decorative use     */
+
+  --text-display: 46px;     /* section headings: @about, @brains */
+  --text-body:    16.5px;   /* paragraph / body copy             */
+  --text-nav:     19.76px;  /* nav / footer links                */
+
+  /* ─── Layout ─────────────────────────────────────── */
+  --content-width: 1422px;
+}
